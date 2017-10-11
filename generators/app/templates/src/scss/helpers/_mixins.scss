@@ -1,0 +1,22 @@
+@mixin themify($property, $pseudo:false) {
+  @each $theme, $color in $themes {
+    $parent: &;
+    @if $pseudo {
+      &--#{$theme} {
+        &:#{$pseudo} {
+          @extend #{$parent} !optional;
+          #{$property}: #{$color};
+        }
+      }
+    } @else {
+      &--#{$theme} {
+        @extend #{$parent} !optional;
+        #{$property}: #{$color};
+      }
+    }
+  }
+}
+
+@function columns($n) {
+  @return (100% / 12) * $n;
+}

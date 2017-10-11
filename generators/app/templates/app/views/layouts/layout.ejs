@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%- title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="page-<%=pageName %>">
+<% include ../header %>
+<main>
+    <%- body %>
+</main>
+<% include ../footer %>
+<%-defineContent('block__scripts')%>
+<script src="/js/client.js"></script>
+</body>
+</html>

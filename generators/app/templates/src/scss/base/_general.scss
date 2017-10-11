@@ -1,0 +1,24 @@
+/**
+*   Global classes
+**/
+
+
+/**
+*   General page styles
+**/
+
+html{
+
+}
+
+body {
+
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+  &:hover, &:focus{
+    color: inherit;
+  }
+}

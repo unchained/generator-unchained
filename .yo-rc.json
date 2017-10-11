@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "UNCHAINED studio",
+      "authorEmail": "hello@unchained.studio",
+      "authorUrl": "https://unchained.studio"
+    }
+  }
+}
