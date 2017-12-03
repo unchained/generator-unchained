@@ -104,7 +104,7 @@ class Flow {
             .pipe(gulpPlugins.named())
             .pipe(gulpPlugins.webpack(require('./config/webpack.config.js')({
                 environment: gulpOptions.production ? "production" : "development",
-                analyze: gulpOptions.production
+                analyze: gulpOptions.analyzeWebpack
             })))
             .pipe(gulp.dest(gulpOptions.js.dist));
     }
