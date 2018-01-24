@@ -1,6 +1,5 @@
-node_modules/
-public/components
-.nyc_output
-.sass-cache
+.DS_Store
+.sass_cache
+node_modules
 .idea
-.yo-rc.json
+/dist/
