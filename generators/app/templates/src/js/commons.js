@@ -1,6 +1,8 @@
 class Client {
-    constructor(){
-
-    }
+// eslint-disable-next-line no-useless-constructor,no-empty-function
+  constructor() {
+  }
 }
-var instance = new Client();
+
+// eslint-disable-next-line no-unused-vars
+const instance = new Client();
