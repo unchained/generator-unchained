@@ -3,7 +3,7 @@ const path = require('path'),
   chalk = require('chalk'),
   dedent = require('dedent-js'),
   gulp = require('gulp'),
-  gulpRemoveTaskOrderDependency = require('undertaker-forward-reference'),
+  GulpClass = require('classy-gulp'),
 
   /**
    * Gulp plugins starting with "gulp-<name>" are loaded automatically under gulpPlugins.<name>
@@ -35,8 +35,9 @@ const path = require('path'),
   },
   serverConfig = require('./config/config');
 
-class Flow {
+class Flow extends GulpClass{
   constructor() {
+    super();
     /**
      * A friendly greeting for you, you beautiful ;)
      */
@@ -44,43 +45,21 @@ class Flow {
         * Hey! I'm gulp. ༼つಠ益ಠ༽つ ─=≡ΣO))
         * Your personal workflow magician.
         `)));
+  }
 
-    /**
-     *  Automatically bind this to Flow class in all of it's methods (tasks)
-     */
-    const _this = new Proxy(this, {
-      get: (target, name) => {
-        if (typeof target[name] === 'function') {
-          return target[name].bind(_this);
-        } else {
-          return target[name];
-        }
-      },
-    });
-
-    /**
-     * Fix gulp task dependency requirements so that we can define task:
-     * default: gulp.series('build', 'server', this.watch)
-     * before the build task has been defined in gulp's memory.
-     */
-    gulp.registry(gulpRemoveTaskOrderDependency());
-
+  defineTasks(){
     /**
      * All tasks which are accessible via "gulp <taskName>" are defined here.
      */
-    this.tasks = {
-      images: gulp.series(_this.images),
-      build: gulp.series(_this.clean, gulp.parallel(_this.styles, _this.scripts)),
-      nodemon: gulp.series(_this.server),
-      server: gulp.series(_this.server, _this.startBrowserSync, (done) => {
-        done();
-      }),
-      test: gulp.series(function (done) {
-        console.log("yep, works.");
+    return {
+      images: gulp.series(this.images),
+      build: gulp.series(this.clean, gulp.parallel(this.styles, this.scripts)),
+      nodemon: gulp.series(this.server),
+      server: gulp.series(this.server, this.startBrowserSync, (done) => {
         done();
       }),
       deploy: gulp.series('build'),
-      default: gulp.series('build', 'server', _this.watch),
+      default: gulp.series('build', 'server', this.watch),
     };
   }
 
@@ -143,13 +122,13 @@ class Flow {
 
   /**
    * Watches for changes and automatically performs a given task depending on the type of file changed.
-   * @param {function} [done] - An automatically assigned and invoked callback to signal asynchronius completion (do not use!)
+   * @param {function} [done] - An automatically assigned and invoked callback to signal asynchronous completion (do not use!)
    */
   watch(done) {
-    gulp.watch(path.join(gulpOptions.styles.path.scss, '/**/*.scss')).on('all', this.styles);
-    gulp.watch(path.join(gulpOptions.html.src, `/**/*${gulpOptions.html.ext}`)).on('all', gulp.series(this.reload));
-    gulp.watch(path.join(gulpOptions.js.src, '**/*.js')).on('all', gulp.series(this.scripts, this.reload));
-    gulp.watch(path.join(gulpOptions.images.src, '**/*.{jpg,png,svg}')).on('all', gulp.series(this.images, this.reload));
+    gulp.watch(path.join(gulpOptions.styles.path.scss, '/**/*.scss'), this.styles);
+    gulp.watch(path.join(gulpOptions.html.src, `/**/*${gulpOptions.html.ext}`), gulp.series(this.reload));
+    gulp.watch(path.join(gulpOptions.js.src, '**/*.js'), gulp.series(this.scripts, this.reload));
+    gulp.watch(path.join(gulpOptions.images.src, '**/*.{jpg,png,svg}'), gulp.series(this.images, this.reload));
     done();
   }
 
@@ -255,22 +234,10 @@ class Flow {
     del.sync('dist');
     done();
   }
-
-  /**
-   * registers tasks for use from the CLI.
-   * ---- WARNING: the task order is important! ----
-   * @param {Object} tasks - the object of key:value pairs of name:task
-   */
-  registerTasks(tasks) {
-    for (const [name, task] of Object.entries(tasks)) {
-      gulp.task(name, task);
-    }
-  }
 }
 
 /**
  *      Let's get the party started!
  *      Don't forget to have fun on this new project! (✿ ◕ ‿ ◕)ᓄ ╰U╯
  */
-const work = new Flow();
-exports = work.tasks;
+gulp.registry(new Flow());
