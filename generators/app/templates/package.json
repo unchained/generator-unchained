@@ -1,6 +1,6 @@
 {
   "name": "unchained-studio",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "author": "UNCHAINED studio <hello@unchained.studio>",
   "private": true,
@@ -31,6 +31,7 @@
     "browser-sync": "^2.18.13",
     "chai": "^3.5.0",
     "chalk": "^2.1.0",
+    "classy-gulp": "^1.0.0",
     "debug": "^2.2.0",
     "dedent-js": "^1.0.1",
     "del": "^3.0.0",

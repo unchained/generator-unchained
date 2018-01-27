@@ -9,5 +9,4 @@ router.get('/', (req, res, next) => {
   res.render('index', {
     title: 'Generator-Express MVC',
   });
-  next();
 });

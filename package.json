@@ -1,6 +1,6 @@
 {
   "name": "generator-unchained",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Your workflow - now unchained.",
   "homepage": "https://github.com/unchained/generator-unchained",
   "author": {
@@ -8,7 +8,9 @@
     "email": "hello@unchained.studio",
     "url": "https://unchained.studio"
   },
-  "files": ["generators"],
+  "files": [
+    "generators"
+  ],
   "keywords": [
     "yeoman-generator",
     "unchained",
@@ -51,11 +53,20 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
-    "extends": ["xo", "prettier"],
+    "extends": [
+      "xo",
+      "prettier"
+    ],
     "env": {
       "jest": true,
       "node": true
@@ -69,7 +80,9 @@
         }
       ]
     },
-    "plugins": ["prettier"]
+    "plugins": [
+      "prettier"
+    ]
   },
   "repository": {
     "type": "git",
