@@ -4,7 +4,7 @@ module.exports = {
   app: {
     nodemon: {
       script: 'app.js',
-      nodeArgs: ['--inspect'],
+      // nodeArgs: ['--inspect'],
       ext: 'js json',
       ignore: ['public/**/*.js', 'app/views/**/*.js', 'config/**/*.config.js', 'gulpfile.js', 'node_modules/'],
       env: {
