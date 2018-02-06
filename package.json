@@ -1,10 +1,10 @@
 {
   "name": "generator-unchained",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Your workflow - now unchained.",
   "homepage": "https://github.com/unchained/generator-unchained",
   "author": {
-    "name":   "UNCHAINED studio",
+    "name": "UNCHAINED studio",
     "email": "hello@unchained.studio",
     "url": "https://unchained.studio"
   },
